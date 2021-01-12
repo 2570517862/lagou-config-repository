@@ -1,2 +1,1 @@
-test: 
-  id: 128
+appId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
