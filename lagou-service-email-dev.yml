@@ -1,1 +1,1 @@
-appid: ${spring.application.name}:${server.port}
+appId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
