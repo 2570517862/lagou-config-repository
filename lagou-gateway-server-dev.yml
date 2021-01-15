@@ -1,2 +1,2 @@
 appId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-registryURL: /api//user/register/
+registryURL: 123
