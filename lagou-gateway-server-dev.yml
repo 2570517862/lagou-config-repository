@@ -2,3 +2,57 @@ appId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.por
 request.registryURL: /api/user/register
 request.interval: 60000
 request.maxCount: 100
+server:
+  port: 9002
+spring:
+  application:
+    name: lagou-gateway-server
+  cloud:
+    config:
+      uri: http://127.0.0.1:9006
+      name: lagou-gateway-server
+      profile: dev
+      label: main
+    gateway:
+      routes:
+        - id: lagou-service-code
+          uri: lb://lagou-service-code
+          predicates:
+            - Path=/api/code/**
+          filters:
+            - StripPrefix=1
+            - StripPrefix=1
+        - id: lagou-service-email
+          uri: lb://lagou-service-email
+          predicates:
+            - Path=/api/email/**
+          filters:
+            - StripPrefix=1
+            - StripPrefix=1
+        - id: lagou-service-user
+          uri: lb://lagou-service-user
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - StripPrefix=1
+            - StripPrefix=1
+  rabbitmq:
+    host: 192.168.160.141
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  instance:
+    #服务实例中显示ip，而不是显示主机名（兼容老的eureka版本）
+    ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8090/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
