@@ -1,7 +1,4 @@
 appId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-request.registryURL: /api/user/register
-request.interval: 60000
-request.maxCount: 100
 server:
   port: 9002
 spring:
@@ -56,3 +53,10 @@ management:
     web:
       exposure:
         include: "*"
+request:
+  registryURL: /api/user/register
+  interval: 60000
+  maxCount: 100
+  passUrl:
+    - /api/user
+    - /api/code/create
