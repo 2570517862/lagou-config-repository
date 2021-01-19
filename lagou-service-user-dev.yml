@@ -1,1 +1,42 @@
 appId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+server:
+  port: 8080
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.160.141:3306/test?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    #driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  application:
+    name: lagou-service-user
+  cloud:
+    config:
+      uri: http://127.0.0.1:9006
+      name: lagou-service-user
+      profile: dev
+      label: main
+  rabbitmq:
+    host: 192.168.160.141
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  instance:
+    #服务实例中显示ip，而不是显示主机名（兼容老的eureka版本）
+    ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8090/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    id-type: auto
