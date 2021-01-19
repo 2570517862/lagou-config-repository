@@ -57,6 +57,4 @@ request:
   registryURL: /api/user/register
   interval: 60000
   maxCount: 100
-  passUrl:
-    - /api/user
-    - /api/code/create
+  passUrl: /api/user,/api/code/create
