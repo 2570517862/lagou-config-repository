@@ -1,1 +1,22 @@
 appId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+server:
+  port: 8090
+spring:
+  application:
+    name: lagou-eureka-server
+eureka:
+  instance:
+    hostname: LagouCloudEurekaServerA
+    #服务实例中显示ip，而不是显示主机名（兼容老的eureka版本）
+    ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:${server.port}/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
